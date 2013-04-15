@@ -1,0 +1,48 @@
+<%= form_for(@product) do |f| %>
+  <% if @product.errors.any? %>
+    <div class="alert alert-error">
+      <h2><%= pluralize(@product.errors.count, "error") %> ha impedido que este formulario sea guardado:</h2>
+      <ul>
+      <% @product.errors.values.each do |msg| %>
+        <li><%= msg[0] %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table class="table create">
+    <tr>
+      <td colspan="2">
+        <%= f.label :name, "Producto" %>
+        <%= f.text_field :name, :class=>"input-large" %>
+      </td>
+      <td class="field">
+        <%= f.label :image_url, "Nombre de la imagen (completo)" %>
+        <%= f.text_field :image_url, :class=>"input-medium" %>
+      </td>
+    </tr>
+    <tr>
+      <td class="field">
+        <%= f.label :list_price, "Precio de lista" %>
+        <%= f.text_field :list_price, :class=>"input-mini" %>
+      </td>
+      <td>
+        <%= f.label :sell_price, "Precio de venta" %>
+        <%= f.text_field :sell_price, :class=>"input-mini" %>
+      </td>
+      <td class="field">
+        <%= f.label :stock, "Stock" %>
+        <%= f.number_field :stock, :class =>"input-mini" %>
+      </td>
+    </tr>
+    <tr>
+      <td class="field" colspan="3">
+        <%= f.label :description, "Descripcion" %>
+        <%= f.text_area :description, :rows=>"10", :class=>"input-xxlarge" %>
+      </td>
+    </tr>
+  </table>
+  <div class="actions">
+    <%= f.submit "Guardar", :class=>"btn" %>
+  </div>
+<% end %>

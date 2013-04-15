@@ -1,0 +1,48 @@
+<%= form_for(@provider) do |f| %>
+  <% if @provider.errors.any? %>
+    <div id="alert alert-error">
+      <h2><%= pluralize(@provider.errors.count, "error") %> ha impedido que este formulario sea guardado:</h2>
+
+      <ul>
+      <% @provider.errors.values.each do |msg| %>
+        <li><%= msg[0] %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <table class="table create">
+    <tr>
+      <td colspan="2">    
+        <%= f.label :name, "Proveedor" %>
+        <%= f.text_field :name, :class=>"input-xxlarge" %>
+      </td>
+      <td class="field">
+        <%= f.label :phone, "Telefono" %>
+        <%= f.text_field :phone, :class=>"input-medium" %>
+      </td>
+    </tr>
+    <tr>
+      <td class="field">
+        <%= f.label :address, "Direccion" %>
+        <%= f.text_field :address, :class=>"input-xlarge" %>
+      </td>
+      <td>
+        <%= f.label :city, "Ciudad" %>
+        <%= f.text_field :city, :class=>"input-medium" %>
+      </td>
+      <td class="field">
+        <%= f.label :state, "Provincia" %>
+        <%= f.number_field :state, :class =>"input-medium" %>
+      </td>
+    </tr>
+    <tr>
+      <td class="field" colspan="3">
+        <%= f.label :comments, "Comentarios" %>
+        <%= f.text_area :comments, :rows=>"10", :class=>"input-xxlarge" %>
+      </td>
+    </tr>
+  </table>
+  <div class="actions">
+    <%= f.submit "Guardar", :class=>"btn btn-success" %>
+  </div>
+<% end %>

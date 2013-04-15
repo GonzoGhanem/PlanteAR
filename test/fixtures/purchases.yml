@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  provider_id: 1
+  date: 2013-04-11
+  amount: 9.99
+
+two:
+  provider_id: 1
+  date: 2013-04-11
+  amount: 9.99

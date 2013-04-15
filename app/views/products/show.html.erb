@@ -1,0 +1,37 @@
+<% if !notice.nil? %>
+  <div class="alert alert-success"><%= notice %></div>
+<% end%>
+
+<p>
+  <b>Producto:</b>
+  <%= @product.name %>
+</p>
+
+<p>
+  <b>Descripcion:</b>
+  <%= @product.description %>
+</p>
+
+<p>
+  <b>Imagen:</b>
+  <%= @product.image_url %>
+</p>
+
+<p>
+  <b>Precio de lista:</b>
+  <%= number_to_currency(@product.list_price) %>
+</p>
+
+<p>
+  <b>Precio de venta:</b>
+  <%= number_to_currency(@product.sell_price) %>
+</p>
+
+<p>
+  <b>Stock:</b>
+  <%= @product.stock %>
+</p>
+
+
+<%= link_to 'Editar', edit_product_path(@product) %> |
+<%= link_to 'Volver', products_path %>

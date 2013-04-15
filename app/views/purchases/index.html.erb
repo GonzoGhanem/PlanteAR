@@ -1,0 +1,23 @@
+<h1>Compras</h1>
+
+<table class="table">
+  <tr>
+    <th>Proveedor</th>
+    <th>Fecha</th>
+    <th>Monto</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @purchases.each do |purchase| %>
+  <tr>
+    <td><%= Provider.find(purchase.provider_id).name %></td>
+    <td><%= purchase.date %></td>
+    <td><%= number_to_currency(purchase.amount) %></td>
+    <td><%= link_to 'Ver', purchase %></td>
+    <td><%= link_to 'Editar', edit_purchase_path(purchase) %></td>
+    <td><%= link_to 'Borrar', purchase, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>

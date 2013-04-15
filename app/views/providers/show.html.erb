@@ -1,0 +1,37 @@
+<% if !notice.nil? %>
+  <div class="alert alert-success"><%= notice %></div>
+<% end%>
+
+<p>
+  <b>Nombre:</b>
+  <%= @provider.name %>
+</p>
+
+<p>
+  <b>Telefono:</b>
+  <%= @provider.phone %>
+</p>
+
+<p>
+  <b>Direccion:</b>
+  <%= @provider.address %>
+</p>
+
+<p>
+  <b>Ciudad:</b>
+  <%= @provider.city %>
+</p>
+
+<p>
+  <b>Provincia:</b>
+  <%= @provider.state %>
+</p>
+
+<p>
+  <b>Comentarios:</b>
+  <%= @provider.comments %>
+</p>
+
+
+<%= link_to 'Editar', edit_provider_path(@provider) %> |
+<%= link_to 'Volver', providers_path %>

@@ -1,0 +1,22 @@
+<% if !notice.nil? %>
+  <div class="alert alert-success"><%= notice %></div>
+<% end%>
+
+<p>
+  <b>Provider:</b>
+  <%= @purchase.provider_id %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @purchase.date %>
+</p>
+
+<p>
+  <b>Amount:</b>
+  <%= @purchase.amount %>
+</p>
+
+
+<%= link_to 'Editar', edit_purchase_path(@purchase) %> |
+<%= link_to 'Volver', purchases_path %>

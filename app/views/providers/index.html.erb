@@ -1,0 +1,33 @@
+<h1>Proveedores</h1>
+
+<table class="table">
+  <tr>
+    <th>Nombre</th>
+    <th>Teléfono</th>
+    <th>Dirección</th>
+    <th>Ciudad</th>
+    <th>Provincia</th>
+    <th>Comentarios</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @providers.each do |provider| %>
+  <tr>
+    <td><%= provider.name %></td>
+    <td><%= provider.phone %></td>
+    <td><%= provider.address %></td>
+    <td><%= provider.city %></td>
+    <td><%= provider.state %></td>
+    <td><%= provider.comments %></td>
+    <td><%= link_to 'Ver', provider %></td>
+    <td><%= link_to 'Editar', edit_provider_path(provider) %></td>
+    <td><%= link_to 'Borrar', provider, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+
+
+<%= link_to 'Nuevo Proveedor', new_provider_path %>

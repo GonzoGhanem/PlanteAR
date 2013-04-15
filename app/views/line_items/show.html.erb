@@ -1,0 +1,27 @@
+<% if !notice.nil? %>
+  <div class="alert alert-success"><%= notice %></div>
+<% end%>
+
+<p>
+  <b>Producto:</b>
+  <%= @line_item.product_id %>
+</p>
+
+<p>
+  <b>Cantidad:</b>
+  <%= @line_item.amount %>
+</p>
+
+<p>
+  <b>Precio unitario:</b>
+  <%= @line_item.unit_price %>
+</p>
+
+<p>
+  <b>Descuento:</b>
+  <%= @line_item.discount %>
+</p>
+
+
+<%= link_to 'Editar', edit_line_item_path(@line_item) %> |
+<%= link_to 'Volver', line_items_path %>
