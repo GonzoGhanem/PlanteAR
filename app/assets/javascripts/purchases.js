@@ -1,3 +1,15 @@
+// $(document).ready(function () {
+//   $('#new_purchase').validate({
+//     debug: true,
+//     rules: {
+//       ".amount-field": {required: true}
+//     //“user[password]“: {required: true, minlength: 6},
+//     //“user[password_confirmation]“: {required: true, equalTo: “#user_password”}
+//     }
+//   });
+// });
+
+
 $(function() {
     return $('form').on('click', '.remove_fields', function(event) {
       $(this).prev('input[type=hidden]').val('1');
@@ -6,7 +18,7 @@ $(function() {
     });
   });
 
-$(function() {
+
   var recalc = function(){
     var quantity = $( '#' + $(this).attr('id').replace('unit_price', 'amount') ).val(); 
     var price =  $( '#' + $(this).attr('id').replace('amount', 'unit_price') ).val();
@@ -24,17 +36,21 @@ $(function() {
         $('#purchase_amount').val(parseFloat($('#purchase_amount').val(),2) + parseFloat($(o).val()) );
     });
   };
-  $('input[id$="amount"], input[id$="unit_price"]').keypress(recalc);
-  $('input[id$="amount"], input[id$="unit_price"]').change(recalc);
+
+  var attach_recalc = function(){
+    $('input[id$="amount"], input[id$="unit_price"]').keypress(recalc);
+    $('input[id$="amount"], input[id$="unit_price"]').change(recalc);
+  };
+  attach_recalc();
+
+$(function() {
+  $('form').on('click', '.add_fields', function(event) {
+    var regexp, time;
+    time = new Date().getTime();
+    regexp = new RegExp($(this).data('id'), 'g');
+    new_section = $(this).data('fields').replace(regexp, time);
+    $("table tr:last").after(new_section);
+    attach_recalc();
+    return event.preventDefault();
+  });
 });
-
-
-
-$('form').on('click', '.remove_fields', function(event) {
-  var regexp, time;
-  time = new Date().getTime();
-  regexp = new RegExp($(_this).data('id'), 'g');
-  $(_this).before($(_this).data('fields').replace(regexp, time));
-  return event.preventDefault();
-});
-

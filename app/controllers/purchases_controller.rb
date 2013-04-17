@@ -43,15 +43,9 @@ class PurchasesController < ApplicationController
   # POST /purchases.json
   def create
     @purchase = Purchase.new(params[:purchase])
-    @purchase.line_items.each do |line| 
-          @product = Product.find(line.product_id)
-          @product.list_price = line.unit_price
-          @product.stock = @product.stock + line.amount
-          @product.save
-        end
-    
     respond_to do |format|
       if @purchase.save
+        @purchase.update_products
         format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
         format.json { render json: @purchase, status: :created, location: @purchase }
       else

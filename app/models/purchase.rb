@@ -8,4 +8,13 @@ class Purchase < ActiveRecord::Base
   validates_presence_of :date, :message=>"La fecha no puede estar en blanco"
   validates_presence_of :provider_id, :message=>"Debe seleccionar un Proveedor para registrar la compra"
   validates_presence_of :line_items, :message=>"Al menos debe completar una linea de compra"
+
+  def update_products
+  	line_items.each do |line| 
+    	@product = Product.find(line.product_id)
+        @product.list_price = line.unit_price
+        @product.stock = @product.stock + line.amount
+        @product.save
+    end
+  end
 end

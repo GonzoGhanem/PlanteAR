@@ -9,7 +9,7 @@ class Product < ActiveRecord::Base
 
   validates_numericality_of :list_price, :greater_than => 0, :message => "El precio de lista no puede ser Negativo" 
   validates_numericality_of :sell_price, :greater_than => 0, :unless => lambda { self.sell_price.blank? }, :message => "El precio de venta no puede ser Negativo" 
-  validates_numericality_of :stock,:greater_than => 0, :message => "El stock no puede ser Negativo" 
+  validates_numericality_of :stock,:greater_than => -1, :message => "El stock no puede ser Negativo" 
 
   validates_numericality_of :stock, :only_integer => true, :message => "El Stock debe ser un numero entero"
   validates_numericality_of :list_price, :message => "El Precio de list debe ser un numero"
