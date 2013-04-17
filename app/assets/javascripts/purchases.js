@@ -6,39 +6,35 @@ $(function() {
     });
   });
 
-// $(function() {
-//   $('price-field').change(function(){
-//     $('#purchase_line_items_attributes_0_subtotal').val($('#purchase_line_items_attributes_0_unit_price').val() * $('#purchase_line_items_attributes_0_amount').val());
-//   });
-// });
-
-
 $(function() {
-  $('#purchase_line_items_attributes_0_unit_price').change(function(){
-    $('#purchase_line_items_attributes_0_subtotal').val($('#purchase_line_items_attributes_0_unit_price').val() * $('#purchase_line_items_attributes_0_amount').val());
-  });
+  var recalc = function(){
+    var quantity = $( '#' + $(this).attr('id').replace('unit_price', 'amount') ).val(); 
+    var price =  $( '#' + $(this).attr('id').replace('amount', 'unit_price') ).val();
+
+    var $subtotal = $( '#' + $(this).attr('id').replace('amount', 'subtotal').replace('unit_price', 'subtotal') );
+    
+    if( ! $.isNumeric(quantity) || !$.isNumeric(price) )
+        return;
+
+    $subtotal.val( quantity * price );
+
+    $('#purchase_amount').val(0);
+    $('input[id$="subtotal"]').each(function(i,o){
+      if($.isNumeric($(o).val()))
+        $('#purchase_amount').val(parseFloat($('#purchase_amount').val(),2) + parseFloat($(o).val()) );
+    });
+  };
+  $('input[id$="amount"], input[id$="unit_price"]').keypress(recalc);
+  $('input[id$="amount"], input[id$="unit_price"]').change(recalc);
 });
-  // var amount = document.getElementById('purchase_line_items_attributes_0_amount');
-  // var price = document.getElementById('purchase_line_items_attributes_0_unit_price');
-  // var subtotal = document.getElementById('purchase_line_items_attributes_0_subtotal');
 
-  // subtotal.setAttribute('onBlur', 
-  //   function () {
-  //     var sub = parseFloat(amount.value) * parseFloat(price.value);
-  //     subtotal.value = sub;
-  //   });
-  // });
 
-// $(function() {
-//   var regexp, time;
 
-//   $('form').on('click', '.add_fields', function(event) {});
+$('form').on('click', '.remove_fields', function(event) {
+  var regexp, time;
+  time = new Date().getTime();
+  regexp = new RegExp($(_this).data('id'), 'g');
+  $(_this).before($(_this).data('fields').replace(regexp, time));
+  return event.preventDefault();
+});
 
-//   time = new Date().getTime();
-
-//   regexp = new RegExp($(this).data('id'), 'g');
-
-//   $(this).before($(this).data('fields').replace(regexp, time));
-//   event.preventDefault();
-
-// });
