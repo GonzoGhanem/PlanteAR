@@ -1,13 +1,6 @@
-// $(document).ready(function () {
-//   $('#new_purchase').validate({
-//     debug: true,
-//     rules: {
-//       ".amount-field": {required: true}
-//     //“user[password]“: {required: true, minlength: 6},
-//     //“user[password_confirmation]“: {required: true, equalTo: “#user_password”}
-//     }
-//   });
-// });
+$(document).ready(function () {
+  attach_recalc();
+});
 
 
 $(function() {
@@ -41,7 +34,6 @@ $(function() {
     $('input[id$="amount"], input[id$="unit_price"]').keypress(recalc);
     $('input[id$="amount"], input[id$="unit_price"]').change(recalc);
   };
-  attach_recalc();
 
 $(function() {
   $('form').on('click', '.add_fields', function(event) {
