@@ -8,6 +8,7 @@ PlanteAr::Application.routes.draw do
   resources :providers
 
   get "home/index"
+  get "products/gallery"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
