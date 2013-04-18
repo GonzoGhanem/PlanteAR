@@ -43,6 +43,7 @@
     </tr>
   </table>
   <div class="actions">
-    <%= f.submit "Guardar", :class=>"btn" %>
+    <%= f.submit "Guardar", :class=>"btn btn-success" %>
+    <%= link_to 'Volver', products_path, {:class=>"btn btn-danger"} %>
   </div>
 <% end %>

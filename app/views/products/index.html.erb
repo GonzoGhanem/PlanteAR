@@ -1,5 +1,6 @@
 <h1>Productos</h1>
-<table class="table">
+<table id="products"class="display">
+ <thead> 
   <tr>
     <th>Cod.</th>
     <th>Producto</th>
@@ -12,7 +13,8 @@
     <th></th>
     <th></th>
   </tr>
-
+ </thead>
+ <tbody>
 <% @products.each do |product| %>
   <tr>
     <td><%= product.id %></td>
@@ -27,8 +29,9 @@
     <td><%= link_to 'Borrar', product, method: :delete, data: { confirm: 'Estas seguro?' } %></td>
   </tr>
 <% end %>
+</tbody>
 </table>
-
-
-
-<%= link_to 'Nuevo Producto', new_product_path %>
+</br>
+<div>
+    <%= link_to 'Nuevo Producto', new_product_path, {:class=>"btn btn-info pull-left"}%>
+</div>
