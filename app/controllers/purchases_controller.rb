@@ -45,7 +45,7 @@ class PurchasesController < ApplicationController
     @purchase = Purchase.new(params[:purchase])
     respond_to do |format|
       if @purchase.save
-        @purchase.update_products
+        @purchase.update_products("Insert")
         format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
         format.json { render json: @purchase, status: :created, location: @purchase }
       else
@@ -65,6 +65,7 @@ class PurchasesController < ApplicationController
 
     respond_to do |format|
       if @purchase.update_attributes(params[:purchase])
+        @purchase.update_products("Update")
         format.html { redirect_to @purchase, notice: 'Purchase was successfully updated.' }
         format.json { head :no_content }
       else

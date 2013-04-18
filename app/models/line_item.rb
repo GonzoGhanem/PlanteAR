@@ -1,4 +1,7 @@
 class LineItem < ActiveRecord::Base
+
+  include ActiveModel::Dirty
+
   attr_accessible :amount, :discount, :product_id, :unit_price, :subtotal
   attr_accessible :products_attributes
   # attr_accessible :_destroy
@@ -16,6 +19,5 @@ class LineItem < ActiveRecord::Base
   
   validates_presence_of :subtotal, :message => "El subtotal no puede estar en blanco"
   validates_numericality_of :subtotal, :greater_than => 0,:unless => lambda { self.subtotal.blank? }, :message => "El subtotal no puede ser negativo"
-  
 
 end
