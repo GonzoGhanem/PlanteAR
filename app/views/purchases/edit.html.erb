@@ -1,6 +1,56 @@
 <h1>Editar Compra</h1>
 
-<%= render 'form' %>
+<%= form_for(@purchase) do |f| %>
+  <% if @purchase.errors.any? %>
+    <div class="alert alert-error">
+      <h2><%= pluralize(@purchase.errors.count, "error") %> ha impedido que este formulario sea guardado:</h2>
+      <ul>
+      <% @purchase.errors.values.each do |msg| %>
+        <li><%= msg[0] %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th colspan="2">
+        <div>
+        	<input type="text" disabled="true" class="input-xlarge" value="<%= Provider.find(@purchase.provider_id).name %>"> </input>
+        </div>
+      </th>
+      <th colspan="2">
+        <div>
+        <%= f.date_select :date, {}, {:class=>"input-small pull-right"} %>
+        </div>
+      </th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+      <td>
+        <h3>Total</h3>
+      </td>
+      <td colspan="3">
+      <%= f.text_field :amount, :placeholder=>"Total", :class=>"input-mini pull-right" %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4">
+        <%= link_to_add_fields "Agregar lineas de compra..", f, :line_items %>
+        <%= f.submit "Registrar compra", :class=>"btn btn-success pull-right" %>
+        <%= link_to 'Cancelar', purchases_path, {:class=>"btn btn-danger pull-right"} %>
+      </td>
+    </tr>
+    </tfoot>
+    <tbody>
+    <%= f.fields_for :line_items do | builder | %>
+      <%= render "line_item_fields", :f => builder %>
+    <% end %>
+    </tbody>
+<% end %>
+
 
 <%= link_to 'Ver', @purchase %> |
 <%= link_to 'Volver', purchases_path %>
