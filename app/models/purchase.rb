@@ -10,28 +10,23 @@ class Purchase < ActiveRecord::Base
   validates_presence_of :line_items, :message=>"Al menos debe completar una linea de compra"
 
   def update_products(action)
-    if(action == "insert")
-      {
+    if(action == "Insert")
         line_items.each do |line| 
           @product = Product.find(line.product_id)
           @product.list_price = line.unit_price
           @product.stock = @product.stock + line.amount
           @product.save
         end
-      }
     elsif (action == "Update")
-      {
         line_items.each do |line|
           line_changes = line.previous_changes
           if (line_changes[:product_id].nil?)
-            {
               @product = Product.find(line.product_id)
-              @product.list_price = line_changes[:unit_price] unless line_changes[:unit_price].nil?
+              @product.list_price = line_changes[:unit_price][1] unless line_changes[:unit_price].nil?
               @product.stock = @product.stock - line_changes[:amount][0] + line_changes[:amount][1] unless (line_changes[:amount].nil?) 
               @product.save
-            }
           end
-      }
+        end
     end
   end
 end
