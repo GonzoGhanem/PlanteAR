@@ -37,6 +37,7 @@ class PurchasesController < ApplicationController
   # GET /purchases/1/edit
   def edit
     @purchase = Purchase.find(params[:id])
+    @purchase.line_items.build
   end
 
   # POST /purchases
