@@ -1,7 +1,7 @@
 <%= form_for(@purchase) do |f| %>
   <% if @purchase.errors.any? %>
     <div class="alert alert-error">
-      <h2><%= pluralize(@purchase.errors.count, "error") %> ha impedido que este formulario sea guardado:</h2>
+      <h2><%= pluralize(@purchase.errors.count, "fucking error") %></h2>
       <ul>
       <% @purchase.errors.values.each do |msg| %>
         <li><%= msg[0] %></li>
