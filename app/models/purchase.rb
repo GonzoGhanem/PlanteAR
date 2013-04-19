@@ -25,6 +25,11 @@ class Purchase < ActiveRecord::Base
               @product.list_price = line_changes[:unit_price][1] unless line_changes[:unit_price].nil?
               @product.stock = @product.stock - line_changes[:amount][0] + line_changes[:amount][1] unless (line_changes[:amount].nil?) 
               @product.save
+            elsif (line_changes[:product_id][0] == nil)
+              @product = Product.find(line.product_id)
+              @product.list_price = line.unit_price
+              @product.stock = @product.stock + line.amount
+              @product.save
           end
         end
     end
