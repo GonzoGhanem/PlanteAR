@@ -2,10 +2,9 @@
   <div class="alert alert-success"><%= notice %></div>
 <% end%>
 
-<p>
-  <b>Nombre:</b>
+<h1>
   <%= @provider.name %>
-</p>
+</h1>
 
 <p>
   <b>Telefono:</b>
@@ -33,5 +32,5 @@
 </p>
 
 
-<%= link_to 'Editar', edit_provider_path(@provider) %> |
-<%= link_to 'Volver', providers_path %>
+<%= link_to 'Editar', edit_provider_path(@provider), {:class=>"btn btn-info"} %> |
+<%= link_to 'Volver', providers_path, {:class=>"btn btn-danger"} %>

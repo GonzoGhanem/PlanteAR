@@ -46,7 +46,7 @@ class PurchasesController < ApplicationController
     respond_to do |format|
       if @purchase.save
         @purchase.update_products("Insert")
-        format.html { redirect_to @purchase, notice: 'Purchase was successfully created.' }
+        format.html { redirect_to @purchase, notice: 'Compra registrada exitosamente!' }
         format.json { render json: @purchase, status: :created, location: @purchase }
       else
         3.times do
@@ -66,7 +66,7 @@ class PurchasesController < ApplicationController
     respond_to do |format|
       if @purchase.update_attributes(params[:purchase])
         @purchase.update_products("Update")
-        format.html { redirect_to @purchase, notice: 'Purchase was successfully updated.' }
+        format.html { redirect_to @purchase, notice: 'Compra modificada con exito!' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
