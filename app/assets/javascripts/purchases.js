@@ -1,6 +1,12 @@
 $(document).ready(function () {
   attach_recalc();
+  $('.product-field').each(function(i,o){
+      var isDisabled = $('.product-field')[i].value.length > 0; 
+      $('.product-field')[i].disabled = isDisabled;
+  });
+  // disableField();
 });
+
 
 
 $(function() {
@@ -11,6 +17,12 @@ $(function() {
     });
   });
 
+  // var disableField = function(){
+  //     $('.product-field').each(function(i,o){
+  //     var isDisabled = $('.product-field')[i].value.length > 0; 
+  //     $('.product-field')[i].disabled = isDisabled;
+  // });
+  // };
 
   var recalc = function(){
     var quantity = $( '#' + $(this).attr('id').replace('unit_price', 'amount') ).val(); 
