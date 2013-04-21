@@ -11,17 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130412235721) do
+ActiveRecord::Schema.define(:version => 20130421221909) do
 
   create_table "line_items", :force => true do |t|
-    t.integer  "purchase_id"
+    t.integer  "line_itemable_id"
     t.integer  "product_id"
     t.integer  "amount"
     t.decimal  "unit_price"
     t.decimal  "discount"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.decimal  "subtotal"
+    t.string   "line_itemable_type"
+  end
+
+  create_table "payment_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "products", :force => true do |t|
@@ -52,6 +59,14 @@ ActiveRecord::Schema.define(:version => 20130412235721) do
     t.decimal  "amount"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "sells", :force => true do |t|
+    t.decimal  "amount"
+    t.date     "date"
+    t.string   "payment_type_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
 end

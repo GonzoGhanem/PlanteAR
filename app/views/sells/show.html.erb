@@ -1,0 +1,22 @@
+<% if !notice.nil? %>
+  <div class="alert alert-success"><%= notice %></div>
+<% end%>
+
+<p>
+  <b>Amount:</b>
+  <%= @sell.amount %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @sell.date %>
+</p>
+
+<p>
+  <b>Payment type:</b>
+  <%= PaymentType.find(@sell.payment_type_id).name %>
+</p>
+
+
+<%= link_to 'Edit', edit_sell_path(@sell), {:class=>"btn btn-info"} %> |
+<%= link_to 'Back', sells_path, {:class=>"btn btn-danger"} %>

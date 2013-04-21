@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  amount: 9.99
+  date: 2013-04-21
+  payment_type: MyString
+
+two:
+  amount: 9.99
+  date: 2013-04-21
+  payment_type: MyString
