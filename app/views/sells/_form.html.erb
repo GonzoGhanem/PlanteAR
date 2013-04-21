@@ -1,22 +1,19 @@
-<%= form_for(@purchase) do |f| %>
-  <% if @purchase.errors.any? %>
+<%= form_for(@sell) do |f| %>
+  <% if @sell.errors.any? %>
     <div class="alert alert-error">
-      <h2><%= pluralize(@purchase.errors.count, "fucking error") %></h2>
+      <h2><%= pluralize(@sell.errors.count, "fucking error") %></h2>
       <ul>
-      <% @purchase.errors.values.each do |msg| %>
+      <% @sell.errors.values.each do |msg| %>
         <li><%= msg[0] %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
-
   <table class="table">
     <thead>
     <tr>
-      <th colspan="2">
-        <div>
-        <%= f.select :provider_id, Provider.all.collect {|p| [ p.name, p.id ] }, {:prompt => 'Seleccione Proveedor'},{:class=>"input-xlarge"} %>
-        </div>
+      <th colspan="3">
+        <%= f.select :payment_type_id, PaymentType.all.collect {|p| [ p.name, p.id ] }, {:prompt => 'Seleccione Metodo de pago'},{:class=>"input-large"} %>
       </th>
       <th colspan="2">
         <div>
@@ -28,16 +25,16 @@
     <tfoot>
     <tr>
       <td>
-        <h3>Total</h3>
+        <h3 colspan="2">Total</h3>
       </td>
-      <td colspan="3">
+      <td colspan="4">
       <%= f.text_field :amount, :placeholder=>"Total", :id=>"total_amount", :class=>"input-mini pull-right" %>
       </td>
     </tr>
     <tr>
-      <td colspan="4">
-        <%= link_to_add_fields "Agregar lineas de compra..", f, :line_items %>
-        <%= f.submit "Registrar compra", :class=>"btn btn-success pull-right" %>
+      <td colspan="5">
+        <%= link_to_add_fields "Agregar lineas de venta..", f, :line_items %>
+        <%= f.submit "Registrar venta", :class=>"btn btn-success pull-right" %>
         <%= link_to 'Cancelar', purchases_path, {:class=>"btn btn-danger pull-right"} %>
       </td>
     </tr>

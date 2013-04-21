@@ -1,0 +1,27 @@
+<h1>Ventas</h1>
+
+<table class="table">
+  <tr>
+    <th>Monto</th>
+    <th>Fecha</th>
+    <th>Medio de pago</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sells.each do |sell| %>
+  <tr>
+    <td><%= sell.amount %></td>
+    <td><%= sell.date %></td>
+    <td><%= PaymentType.find(sell.payment_type_id).name %></td>
+    <td><%= link_to 'Show', sell %></td>
+    <td><%= link_to 'Edit', edit_sell_path(sell) %></td>
+    <td><%= link_to 'Destroy', sell, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Nueva Venta', new_sell_path, :class=>"btn btn-success" %>

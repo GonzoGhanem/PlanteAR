@@ -1,4 +1,8 @@
 PlanteAr::Application.routes.draw do
+  resources :payment_types
+
+  resources :sells
+
   resources :line_items
 
   resources :purchases

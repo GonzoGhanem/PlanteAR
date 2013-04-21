@@ -6,7 +6,9 @@ class LineItem < ActiveRecord::Base
   attr_accessible :products_attributes
   # attr_accessible :_destroy
   # attr_accessor :_destroy
-  belongs_to :purchase
+  belongs_to :line_itemable, :polymorphic => true
+
+  # belongs_to :purchase
   has_one :product
 
   accepts_nested_attributes_for :product

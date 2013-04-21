@@ -1,11 +1,11 @@
-<h1>Editar Compra</h1>
+<h1>Editar Venta</h1>
 
-<%= form_for(@purchase) do |f| %>
-  <% if @purchase.errors.any? %>
+<%= form_for(@sell) do |f| %>
+  <% if @sell.errors.any? %>
     <div class="alert alert-error">
-      <h2><%= pluralize(@purchase.errors.count, "error") %> ha impedido que este formulario sea guardado:</h2>
+      <h2><%= pluralize(@sell.errors.count, "error") %> ha impedido que este formulario sea guardado:</h2>
       <ul>
-      <% @purchase.errors.values.each do |msg| %>
+      <% @sell.errors.values.each do |msg| %>
         <li><%= msg[0] %></li>
       <% end %>
       </ul>
@@ -15,10 +15,8 @@
   <table class="table">
     <thead>
     <tr>
-      <th colspan="2">
-        <div>
-        	<input type="text" disabled="true" class="input-xlarge" value="<%= Provider.find(@purchase.provider_id).name %>"> </input>
-        </div>
+      <th colspan="3">
+      
       </th>
       <th colspan="2">
         <div>
@@ -30,7 +28,7 @@
     <tfoot>
     <tr>
       <td>
-        <h3>Total</h3>
+        <h3 colspan="2">Total</h3>
       </td>
       <td colspan="3">
       <%= f.text_field :amount, :placeholder=>"Total", :class=>"input-mini pull-right" %>
@@ -38,9 +36,9 @@
     </tr>
     <tr>
       <td colspan="5">
-        <%= link_to_add_fields "Agregar lineas de compra..", f, :line_items %>
-        <%= f.submit "Actualizar compra", :class=>"btn btn-success pull-right" %>
-        <%= link_to 'Cancelar', purchases_path, {:class=>"btn btn-danger pull-right"} %>
+        <%= link_to_add_fields "Agregar lineas de venta..", f, :line_items %>
+        <%= f.submit "Actualizar venta", :class=>"btn btn-success pull-right" %>
+        <%= link_to 'Cancelar', sells_path, {:class=>"btn btn-danger pull-right"} %>
       </td>
     </tr>
     </tfoot>
@@ -50,5 +48,3 @@
     <% end %>
     </tbody>
 <% end %>
-
-
