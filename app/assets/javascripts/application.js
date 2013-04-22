@@ -19,15 +19,20 @@ $(document).ready(function() {
   // };
 
   var recalc = function(){
-    var quantity = $( '#' + $(this).attr('id').replace('unit_price', 'amount') ).val(); 
-    var price =  $( '#' + $(this).attr('id').replace('amount', 'unit_price') ).val();
+    var quantity = $( '#' + $(this).attr('id').replace('unit_price', 'amount').replace('discount', 'amount') ).val(); 
+    var price =  $( '#' + $(this).attr('id').replace('amount', 'unit_price').replace('discount', 'unit_price') ).val();
 
-    var $subtotal = $( '#' + $(this).attr('id').replace('amount', 'subtotal').replace('unit_price', 'subtotal') );
+    var discount =  $( '#' + $(this).attr('id').replace('amount', 'discount').replace('unit_price', 'discount') ).val();
+
+    var $subtotal = $( '#' + $(this).attr('id').replace('amount', 'subtotal').replace('unit_price', 'subtotal').replace('discount', 'subtotal') );
     
     if( ! $.isNumeric(quantity) || !$.isNumeric(price) )
         return;
-
-    $subtotal.val( quantity * price );
+    
+    if (! $.isNumeric(discount))
+      $subtotal.val( quantity * price);  
+    else 
+      $subtotal.val( quantity * price * ((100 - discount) / 100));
 
     $('#total_amount').val(0);
     $('input[id$="subtotal"]').each(function(i,o){
@@ -37,8 +42,8 @@ $(document).ready(function() {
   };
 
   var attach_recalc = function(){
-    $('input[id$="amount"], input[id$="unit_price"]').keypress(recalc);
-    $('input[id$="amount"], input[id$="unit_price"]').change(recalc);
+    $('input[id$="amount"], input[id$="unit_price"], input[id$="discount"]').keypress(recalc);
+    $('input[id$="amount"], input[id$="unit_price"], input[id$="discount"]').change(recalc);
   };
 
 
