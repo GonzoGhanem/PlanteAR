@@ -4,8 +4,10 @@ class Product < ActiveRecord::Base
   has_many :line_items
 
   validates_presence_of :name, :message => "El Nombre no puede estar en blanco"
-  validates_presence_of :stock, :message => "El stock no puede estar vacio"
-  validates_presence_of :list_price, :message => "El Precio de lista no puede estar vacio"
+  #validates_presence_of :stock, :message => "El stock no puede estar vacio"
+  validates_uniqueness_of :name, :message => "El Producto ya existe"
+
+  #validates_presence_of :list_price, :message => "El Precio de lista no puede estar vacio"
 
   validates_numericality_of :list_price, :greater_than => 0, :unless => lambda { self.list_price.blank? }, :message => "El precio de lista no puede ser Negativo" 
   validates_numericality_of :sell_price, :greater_than => 0, :unless => lambda { self.sell_price.blank? }, :message => "El precio de venta no puede ser Negativo" 
