@@ -17,7 +17,7 @@
     <tr>
       <th colspan="2">
         <div>
-        	<input type="text" disabled="true" class="input-xlarge" value="<%= Provider.find(@purchase.provider_id).name %>"> </input>
+        	<input type="text" class="input-xlarge" value="<%= Provider.find(@purchase.provider_id).name %>"> </input>
         </div>
       </th>
       <th colspan="2">
@@ -33,7 +33,7 @@
         <h3>Total</h3>
       </td>
       <td colspan="3">
-      <%= f.text_field :amount, :placeholder=>"Total", :class=>"input-mini pull-right" %>
+      <%= f.text_field :amount, :placeholder=>"Total", :id=>"total_amount", :class=>"input-mini pull-right" %>
       </td>
     </tr>
     <tr>
