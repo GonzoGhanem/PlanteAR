@@ -16,7 +16,7 @@ class Purchase < ActiveRecord::Base
         line_items.each do |line| 
           @product = Product.find(line.product_id)
           @product.list_price = line.unit_price
-          @product.stock = @product.stock + line.amount
+          @product.stock = @product.stock.to_i + line.amount
           @product.save
         end
     elsif (action == "Update")
@@ -25,12 +25,12 @@ class Purchase < ActiveRecord::Base
           if (line_changes[:product_id].nil?)
               @product = Product.find(line.product_id)
               @product.list_price = line_changes[:unit_price][1] unless line_changes[:unit_price].nil?
-              @product.stock = @product.stock - line_changes[:amount][0] + line_changes[:amount][1] unless (line_changes[:amount].nil?) 
+              @product.stock = @product.stock.to_i - line_changes[:amount][0].to_i + line_changes[:amount][1].to_i unless (line_changes[:amount].nil?) 
               @product.save
             elsif (line_changes[:product_id][0] == nil)
               @product = Product.find(line.product_id)
               @product.list_price = line.unit_price
-              @product.stock = @product.stock + line.amount
+              @product.stock = @product.stock.to_i + line.amount
               @product.save
           end
         end

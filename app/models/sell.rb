@@ -19,21 +19,22 @@ class Sell < ActiveRecord::Base
         line_items.each do |line| 
           @product = Product.find(line.product_id)
           @product.sell_price = line.unit_price
-          @product.stock = @product.stock - line.amount
+          @product.stock = @product.stock.to_i - line.amount
           @product.save
         end
     elsif (action == "Update")
         line_items.each do |line|
-          line_changes = line.previous_changes
-          if (line_changes[:product_id].nil?)
+          #line_changes = line.previous_changes
+          if (line.previous_changes[:product_id].nil?)
+          #if (line_changes[:product_id].nil?)
               @product = Product.find(line.product_id)
-              @product.sell_price = line_changes[:unit_price][1] unless line_changes[:unit_price].nil?
-              @product.stock = @product.stock + line_changes[:amount][0] - line_changes[:amount][1] unless (line_changes[:amount].nil?) 
+              @product.sell_price = line.previous_changes[:unit_price][1] unless line.previous_changes[:unit_price].nil?
+              @product.stock = @product.stock.to_i + line.previous_changes[:amount][0] - line.previous_changes[:amount][1] unless (line.previous_changes[:amount].nil?) 
               @product.save
-            elsif (line_changes[:product_id][0] == nil)
+            elsif (line.previous_changes[:product_id][0] == nil)
               @product = Product.find(line.product_id)
               @product.sell_price = line.unit_price
-              @product.stock = @product.stock - line.amount
+              @product.stock = @product.stock.to_i - line.amount
               @product.save
           end
         end
