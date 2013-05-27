@@ -1,4 +1,5 @@
 //= require jquery
+//= require jquery_ujs
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.bootstrap
 //= require bootstrap
@@ -7,16 +8,6 @@ $(document).ready(function() {
   	attach_recalc();
 	$('.dropdown-toggle').dropdown()
 });
-
-
-
-
-  // var disableField = function(){
-  //     $('.product-field').each(function(i,o){
-  //     var isDisabled = $('.product-field')[i].value.length > 0; 
-  //     $('.product-field')[i].disabled = isDisabled;
-  // });
-  // };
 
   var recalc = function(){
     var quantity = $( '#' + $(this).attr('id').replace('unit_price', 'amount').replace('discount', 'amount') ).val(); 
