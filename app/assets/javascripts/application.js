@@ -64,6 +64,7 @@ $(function() {
     new_section = $(this).data('fields').replace(regexp, time);
     $("table tr:last").after(new_section);
     attach_recalc();
+    attach_select2();
     return event.preventDefault();
   });
 });
