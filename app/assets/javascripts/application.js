@@ -56,6 +56,7 @@ $(function() {
     $("table tr:last").after(new_section);
     attach_recalc();
     attach_select2();
+    attach_showprice();
     return event.preventDefault();
   });
 });
