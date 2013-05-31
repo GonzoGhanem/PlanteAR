@@ -40,20 +40,36 @@ $(document).ready(function() {
 
   var showprice = function(){
     var product_id = $(this).val(); 
+    var amount_field =  $( '#' + $(this).attr('id').replace('product_id', 'amount'));
     var price_field =  $( '#' + $(this).attr('id').replace('product_id', 'unit_price'));
+    var subtotal_field = $( '#' + $(this).attr('id').replace('product_id', 'subtotal'));
+    $(amount_field).val(1);
     if (product_id === ""){
       $(price_field).val(0);
+      $(amount_field).val(0);
+      if ($.isNumeric($(subtotal_field).val())){
+        $('#total_amount').val(parseFloat($('#total_amount').val(),2) - parseFloat($(subtotal_field).val()) );
+      };
+      $(subtotal_field).val(0);
       return;
     };
     $.get('/products/'+ product_id +'.json', function(data){
     	var price = data.sell_price;
-    	if (price == null)
+    	if (price == null){
     		$(price_field).val(0);
-    	else	
-    		$(price_field).val(price);		
+        return;
+      }
+    	else{  
+        $(price_field).val(price);
+        $(subtotal_field).val($(price_field).val() * $(amount_field).val());
+        $('#total_amount').val(0);
+        $('input[id$="subtotal"]').each(function(i,o){
+          if($.isNumeric($(o).val()))
+            $('#total_amount').val(parseFloat($('#total_amount').val(),2) + parseFloat($(o).val()) );
+        });
+      };
     });    
   };
-
   
   var attach_functions = function(){
     // Attach the filter function to the filter links
@@ -76,4 +92,5 @@ $(document).ready(function() {
       bServerSide: true,
       sAjaxSource: $('#sells').data('source')
     });
+    $(".btn-danger").focus();
   };

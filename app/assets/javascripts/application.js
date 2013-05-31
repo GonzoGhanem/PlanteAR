@@ -37,11 +37,12 @@ $(document).ready(function() {
     $('input[id$="amount"], input[id$="unit_price"], input[id$="discount"]').change(recalc);
   };
 
-
-
 $(function() {
     return $('form').on('click', '.remove_fields', function(event) {
       $(this).prev('input[type=hidden]').val('1');
+      var test = $(this).prev('input[type=hidden]')
+      if ($.isNumeric($(test).prev('input[type=text]').val()))
+        $("#total_amount").val($("#total_amount").val() - $(test).prev('input[type=text]').val());
       $(this).closest('tr').hide();
       return event.preventDefault();
     });
