@@ -9,10 +9,12 @@ $(document).ready(function() {
     if (month < 10)
       month = '0' + month;
     var day = currentTime.getDate();
+    if (day < 10)
+      day = '0' + day;    
     var year = currentTime.getFullYear();
     var filter = year+'-'+month+'-'+day;
     doFilter(filter);
-    $('h3 span').text("'Solo hoy'")
+    $('h3 small').text("'Solo hoy'")
   };
 
   var onlymonth = function(){
@@ -23,13 +25,13 @@ $(document).ready(function() {
     var year = currentTime.getFullYear();
     var filter = year+'-'+month+'-';
     doFilter(filter);
-    $('h3 span').text("'Solo este mes'")
+    $('h3 small').text("'Solo este mes'")
   };
 
   var removefilter = function(){
     var filter = "";
     doFilter(filter);
-    $('h3 span').text("'Todas'")
+    $('h3 small').text("'Todas'")
   };
 
   var doFilter = function(filter_value){
@@ -80,10 +82,7 @@ $(document).ready(function() {
     ///////////////////////////////////
     $('select[id$="product_id"]').change(showprice);
     ///////////////////////////////////
-    $('select[id$="product_id"]').select2({
-      placeholder: "Seleccione un producto",
-      allowClear: true
-    });
+    attach_select2();
     ///////////////////////////////////
     $('#sells').dataTable({
       "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
@@ -93,4 +92,11 @@ $(document).ready(function() {
       sAjaxSource: $('#sells').data('source')
     });
     $(".btn-danger").focus();
+  };
+
+  var attach_select2 = function(){
+    $('select[id$="product_id"]').select2({
+      placeholder: "Seleccione un producto",
+      allowClear: true
+    });
   };
