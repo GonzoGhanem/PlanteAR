@@ -2,21 +2,58 @@
   <div class="alert alert-success"><%= notice %></div>
 <% end%>
 
-<p>
-  <b>Amount:</b>
-  <%= @sell.amount %>
-</p>
+<h1>Resumen de Venta</h1>
 
-<p>
-  <b>Date:</b>
-  <%= @sell.date %>
-</p>
+<%= form_for(@sell) do |f| %>
+  <table class="table">
+    <thead>
+    <tr>
+      <th colspan="4">
+          <div>
+          	<input type="text" disabled="true" class="input-large text-center"value='<%= PaymentType.find(@sell.payment_type_id).name %>'></input>
+          </div>
+      </th>
+      <th colspan="2">
+        <div>
+        <input type="text" disabled="true" class="input-small pull-right"value='<%= @sell.date %>'></input>
+        </div>
+      </th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+    	<td colspan="1">
+    		<%= link_to "Editar", edit_sell_path(@sell) %>
+    	</td>	
+      <td colspan="4">
+        <h2 class="pull-right">Total $</h2>
+      </td>
+      <td colspan="1">
+        <input type="text" disabled="true" class="input-small pull-right"value='<%= @sell.amount %>'></input>
+      </td>
+    </tr>
+    </tfoot>
+    <tbody>
+    	<% @sell.line_items.each do | line | %>
+    		<tr  class="line_fields">
+  				<td colspan="2">
+  					<input type="text" disabled="true" class="input-xxlarge"value='<%= Product.find(line.product_id).name %>'></input>
+  				</td>
+  				<td>
+  					<input type="text" disabled="true" class="input-mini pull-right"value='<%= line.amount %>'></input>
+		  		</td>
+		  		<td>
+		  			<input type="text" disabled="true" class="input-mini pull-right"value='<%= line.unit_price %>'></input>
+		  		</td>
+		  		<td class="input-prepend">
+		      		<span class="add-on">%</span>
+		      		<input type="text" disabled="true" class="input-mini"value='<%= line.discount %>'></input>
+		    	</td>
+		  		<td><input type="text" disabled="true" class="input-mini pull-right"value='<%= line.subtotal %>'></input>
+		  		</td>
+			</tr>
+    	<% end %>
+    </tbody>
+<% end %>
 
-<p>
-  <b>Payment type:</b>
-  <%= PaymentType.find(@sell.payment_type_id).name %>
-</p>
 
-
-<%= link_to 'Edit', edit_sell_path(@sell), {:class=>"btn btn-info"} %> |
-<%= link_to 'Back', sells_path, {:class=>"btn btn-danger"} %>
