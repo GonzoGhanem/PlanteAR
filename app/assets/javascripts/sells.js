@@ -14,7 +14,21 @@ $(document).ready(function() {
     var year = currentTime.getFullYear();
     var filter = year+'-'+month+'-'+day;
     doFilter(filter);
-    $('h3 small').text("'Solo hoy'")
+    $('h3 small').text("Solo hoy" + day+'/'+month+'/'+year);
+  };
+
+  var onlyyesterday = function(){
+    var currentTime = new Date();
+    var month = currentTime.getMonth() + 1;
+    if (month < 10)
+      month = '0' + month;
+    var day = currentTime.getDate() - 1;
+    if (day < 10)
+      day = '0' + day;    
+    var year = currentTime.getFullYear();
+    var filter = year+'-'+month+'-'+day;
+    doFilter(filter);
+    $('h3 small').text("Solo ayer - " +  day+'/'+month+'/'+year);
   };
 
   var onlymonth = function(){
@@ -25,13 +39,13 @@ $(document).ready(function() {
     var year = currentTime.getFullYear();
     var filter = year+'-'+month+'-';
     doFilter(filter);
-    $('h3 small').text("'Solo este mes'")
+    $('h3 small').text("Solo " + getMonthName(month));
   };
 
   var removefilter = function(){
     var filter = "";
     doFilter(filter);
-    $('h3 small').text("'Todas'")
+    $('h3 small').text("Todas");
   };
 
   var doFilter = function(filter_value){
@@ -73,10 +87,20 @@ $(document).ready(function() {
     });    
   };
   
+  var getMonthName = function(month){
+    var months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
+    if (month[0] == "0"){
+      return months[parseInt(month[1]) - 1];
+    }
+    else{
+      return months[parseInt(month) - 1];
+    };
+  };
   var attach_functions = function(){
     // Attach the filter function to the filter links
     // $("input").change(personalized);
     $('#sells-today').click(onlytoday);
+    $('#sells-yesterday').click(onlyyesterday);    
     $('#sells-remove').click(removefilter);
     $('#sells-month').click(onlymonth);
     ///////////////////////////////////
