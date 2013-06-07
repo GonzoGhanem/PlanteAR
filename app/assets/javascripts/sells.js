@@ -14,7 +14,7 @@ $(document).ready(function() {
     var year = currentTime.getFullYear();
     var filter = year+'-'+month+'-'+day;
     doFilter(filter);
-    $('h3 small').text("Solo hoy" + day+'/'+month+'/'+year);
+    $('h3 small').text("Solo hoy - " + day+'/'+month+'/'+year);
   };
 
   var onlyyesterday = function(){
@@ -89,12 +89,7 @@ $(document).ready(function() {
   
   var getMonthName = function(month){
     var months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
-    if (month[0] == "0"){
-      return months[parseInt(month[1]) - 1];
-    }
-    else{
-      return months[parseInt(month) - 1];
-    };
+    return months[parseInt(month[1]) - 1];
   };
   var attach_functions = function(){
     // Attach the filter function to the filter links
