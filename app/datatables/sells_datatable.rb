@@ -21,7 +21,8 @@ private
       [
       	PaymentType.find(sell.payment_type_id).name,
       	sell.amount,
-      	sell.date.strftime("%d/%m/%Y"),
+      	sell.created_at.strftime("%d/%m/%Y - %H:%M"),
+        # sell.date.strftime("%d/%m/%Y"),
       	link_to('Ver', sell)
       ]
     end
@@ -35,7 +36,7 @@ private
     sells = Sell.order("#{sort_column} #{sort_direction}")
     sells = sells.page(page).per_page(per_page)
     if params[:sSearch].present?
-      sells = sells.where("amount like :search or date like :search", search: "%#{params[:sSearch]}%")
+      sells = sells.where("amount like :search or created_at like :search", search: "%#{params[:sSearch]}%")
     end
     sells
   end
@@ -49,8 +50,8 @@ private
   end
 
   def sort_column
-    columns = %w[date]
-    columns[params[:iSortCol_0].to_i]
+    columns = %w[created_at]
+    columns[params[:iSortCol_2].to_i]
   end
 
   def sort_direction
