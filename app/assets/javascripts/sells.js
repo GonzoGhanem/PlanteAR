@@ -108,7 +108,18 @@ $(document).ready(function() {
       "sPaginationType": "bootstrap",
       bProcessing: true,
       bServerSide: true,
-      sAjaxSource: $('#sells').data('source')
+      sAjaxSource: $('#sells').data('source'),
+      fnFooterCallback: function(nRow,aaData,iStart,iEnd,aiDisplay) {
+        var totalSells = 0;
+        for ( var i=0 ; i<aaData.length ; i++ )
+        {
+            totalSells = parseFloat(totalSells) + parseFloat(aaData[i][1]);
+        }
+
+        var nCells = $("tfoot th");
+        // nCells[1].innerHTML = "<span class='badge badge-success'>"+parseFloat(totalSells).toFixed(2)+"</span>";
+        nCells[1].innerHTML = parseFloat(totalSells).toFixed(2);
+      }
     });
     $(".btn-danger").focus();
   };
