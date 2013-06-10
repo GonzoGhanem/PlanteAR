@@ -70,7 +70,15 @@ $(document).ready(function() {
       return;
     };
     $.get('/products/'+ product_id +'.json', function(data){
-    	var price = data.sell_price;
+      var price = 0;
+      if (price_field.attr('id').indexOf("purchase") == 0)
+      {
+        price =  data.list_price;
+      }
+      else
+      {
+        price = data.sell_price;
+      };
     	if (price == null){
     		$(price_field).val(0);
         return;
