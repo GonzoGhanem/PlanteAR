@@ -10,7 +10,7 @@ class SellsDatatable
       sEcho: params[:sEcho].to_i,
       iTotalRecords: Sell.count,
       iTotalDisplayRecords: sells.total_entries,
-      aaData: data
+      aaData: data.push(["Total",@total_amount,"",""])
     }
   end
 
@@ -34,10 +34,15 @@ private
 
   def fetch_sells
     sells = Sell.order("#{sort_column} #{sort_direction}")
-    sells = sells.page(page).per_page(per_page)
+    @total_amount = 0
     if params[:sSearch].present?
       sells = sells.where("amount like :search or created_at like :search", search: "%#{params[:sSearch]}%")
     end
+    sells.each do |sell|
+      @total_amount = @total_amount + sell.amount 
+    end  
+    sells = sells.page(page).per_page(per_page)
+
     sells
   end
 
