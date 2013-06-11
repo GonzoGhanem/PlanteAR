@@ -2,8 +2,6 @@ class SellsController < ApplicationController
   # GET /sells
   # GET /sells.json
   def index
-    @sells = Sell.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: SellsDatatable.new(view_context)}
