@@ -16,6 +16,7 @@ class Purchase < ActiveRecord::Base
         line_items.each do |line| 
           @product = Product.find(line.product_id)
           @product.list_price = line.unit_price
+          # @product.sell_price = line.line_item_product_sell_price.sell_price
           @product.stock = @product.stock.to_i + line.amount
           @product.save
         end

@@ -40,3 +40,4 @@ gem 'bootstrap-sass'
 # To use debugger
 # gem 'debugger'
 gem 'will_paginate'
+gem 'pry'

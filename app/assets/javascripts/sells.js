@@ -59,10 +59,13 @@ $(document).ready(function() {
     var amount_field =  $( '#' + $(this).attr('id').replace('product_id', 'amount'));
     var price_field =  $( '#' + $(this).attr('id').replace('product_id', 'unit_price'));
     var subtotal_field = $( '#' + $(this).attr('id').replace('product_id', 'subtotal'));
+    var sell_price_field = $( '#' + $(this).attr('id').replace('product_id', 'line_item_product_sell_price'));
     $(amount_field).val(1);
     if (product_id === ""){
       $(price_field).val(0);
       $(amount_field).val(0);
+      if (sell_price_field != null)
+        $(sell_price_field).val(0);
       if ($.isNumeric($(subtotal_field).val())){
         $('#total_amount').val(parseFloat($('#total_amount').val(),2) - parseFloat($(subtotal_field).val()) );
       };
@@ -71,9 +74,15 @@ $(document).ready(function() {
     };
     $.get('/products/'+ product_id +'.json', function(data){
       var price = 0;
+      var sell_price = 0;
       if (price_field.attr('id').indexOf("purchase") == 0)
       {
         price =  data.list_price;
+        if (data.sell_price != 0)
+        {
+
+          $(sell_price_field).val(data.sell_price);
+        };
       }
       else
       {

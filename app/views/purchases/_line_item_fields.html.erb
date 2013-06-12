@@ -2,9 +2,12 @@
   <td>
   	<%= f.select :product_id, Product.all.collect {|p| [ p.name, p.id ] }, {:prompt=>"Seleccione el nombre del producto"}, {:class=>"product-field input-xxlarge"} %>
   </td>
-  <td><%= f.number_field :amount, :placeholder=>"Cantidad", :class=>"amount-field input-mini pull-right" %></td>
-  <td><%= f.text_field :unit_price, :placeholder=>"Precio",:class=>"price-field input-mini pull-right" %></td>
-  <td><%= f.text_field :subtotal, :placeholder=>"SubTotal", :class=>"subtotal-field input-mini pull-right" %>
+  <td><%= f.number_field :amount, :placeholder=>"Cantidad", :title=>"Cantidad", :class=>"amount-field input-mini pull-right" %></td>
+  <td><%= f.text_field :unit_price, :placeholder=>"Precio Lista", :title=>"Precio Lista",:class=>"price-field input-mini pull-right" %></td>
+  
+  <td><%= f.text_field :line_item_product_sell_price, :placeholder=>"Precio Venta", :title=>"Precio Venta",:class=>"price-field input-mini pull-right" %></td>
+
+  <td><%= f.text_field :subtotal, :placeholder=>"SubTotal", :title=>"SubTotal", :class=>"subtotal-field input-mini pull-right" %>
   		<%= f.hidden_field :_destroy %>
   	  	<%= link_to "Borrar", "#", :class=>"remove_fields" %>
   	</td>
