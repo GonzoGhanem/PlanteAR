@@ -12,9 +12,13 @@
 
   <table class="table create">
     <tr>
-      <td colspan="2">
+      <td>
         <%= f.label :name, "Producto" %>
         <%= f.text_field :name, :class=>"input-large" %>
+      </td>
+      <td>
+        <%= f.label :name, "Proveedor" %>
+        <%= f.select :provider_id, Provider.all.collect {|p| [ p.name, p.id ] }, {:prompt => 'Seleccione Proveedor'},{:class=>"input-large"} %>
       </td>
       <td class="field">
         <%= f.label :image_url, "Nombre de la imagen (completo)" %>

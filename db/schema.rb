@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130421221909) do
+ActiveRecord::Schema.define(:version => 20130617205945) do
 
   create_table "line_items", :force => true do |t|
     t.integer  "line_itemable_id"
@@ -35,11 +35,12 @@ ActiveRecord::Schema.define(:version => 20130421221909) do
     t.string   "name"
     t.text     "description"
     t.string   "image_url"
-    t.decimal  "list_price"
+    t.decimal  "list_price",  :precision => 10, :scale => 2
     t.decimal  "sell_price"
     t.integer  "stock"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                                 :null => false
+    t.datetime "updated_at",                                 :null => false
+    t.string   "provider_id"
   end
 
   create_table "providers", :force => true do |t|

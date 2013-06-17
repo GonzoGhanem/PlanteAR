@@ -1,7 +1,8 @@
 class Product < ActiveRecord::Base
-  attr_accessible :description, :image_url, :list_price, :name, :sell_price, :stock
+  attr_accessible :description, :image_url, :list_price, :name, :sell_price, :stock, :provider_id
 
   has_many :line_items
+  belongs_to :provider
 
   validates_presence_of :name, :message => "El Nombre no puede estar en blanco"
   #validates_presence_of :stock, :message => "El stock no puede estar vacio"
