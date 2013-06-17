@@ -31,6 +31,12 @@
   <%= @product.stock %>
 </p>
 
+<p>
+  <b>Proveedor:</b>
+    
+    <%= Provider.find(@product.provider_id).name unless @product.provider_id == nil %>
+</p>
+
 
 <%= link_to 'Editar', edit_product_path(@product), {:class=>"btn btn-info"} %> |
 <%= link_to 'Ver Todos', products_path, {:class=>"btn btn-primary"} %>  |
