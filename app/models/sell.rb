@@ -2,8 +2,12 @@ class Sell < ActiveRecord::Base
   attr_accessible :amount, :date, :payment_type_id
   attr_accessible :line_items_attributes
   attr_accessible :payment_type_attributes
+  attr_accessible :products_attributes
+  
   
   has_many :line_items, :as => :line_itemable
+  has_many :products, :through => :line_items
+  
   has_one :payment_type
 
   accepts_nested_attributes_for :line_items, :reject_if => lambda { |a| a[:product_id].blank? }, :allow_destroy => true

@@ -2,6 +2,9 @@ class Product < ActiveRecord::Base
   attr_accessible :description, :image_url, :list_price, :name, :sell_price, :stock, :provider_id
 
   has_many :line_items
+  has_many :sells, :through => :line_items, :source => :line_itemable, :source_type => "Sell"
+  has_many :purchases, :through => :line_items, :source => :line_itemable, :source_type => "Purchase"
+  
   belongs_to :provider
 
   validates_presence_of :name, :message => "El Nombre no puede estar en blanco"

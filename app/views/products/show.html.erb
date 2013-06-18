@@ -1,44 +1,80 @@
+<%= form_for(@product) do |f| %>
 <% if !notice.nil? %>
   <div class="alert alert-success"><%= notice %></div>
 <% end%>
+  <table class="table">
+    <tr>
+      <td>
+        <h1> <%= @product.name %> </h1>
+      </td>
 
-<h1>
-  <%= @product.name %>
-</h1>
+      <td>
+        <h3> Proveedor: <small><%= @product.provider.name unless @product.provider == nil%></small></h3>
+      </td>
 
-<p>
-  <b>Descripcion:</b>
-  <%= @product.description %>
-</p>
+      <td class="field" rowspan="5">
+        <strong> Ultimas 10 Ventas </strong></br>
+        <table class="table table-bordered">
+          <thead>
+            <th> Fecha - Hora </th>
+            <th> Cantidad </th>
+          </thead>
+          <tbody>
+            <% @product.sells.last(10).each do |sell| %>
+            <tr>
+              <td><%= link_to "#{sell.created_at.strftime("%d/%m/%Y - %H:%M")}", sell %> </td>
+              <td><%= sell.line_items.find_by_product_id(@product.id).amount %> </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </td>
+      
+      <td class="field" rowspan="5">
+        <strong> Ultimas 10 Compras </strong></br>
+        <table class="table table-bordered">
+          <thead>
+            <th> Fecha - Hora </th>
+            <th> Cantidad </th>
+          </thead>
+          <tbody>
+            <% @product.purchases.last(10).each do |purchase| %>
+              <tr>
+                <td><%= link_to "#{purchase.created_at.strftime("%d/%m/%Y - %H:%M")}", purchase %> </td>
+                <td><%= purchase.line_items.find_by_product_id(@product.id).amount %> </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+       </td>       
+    </tr>
 
-<p>
-  <b>Imagen:</b>
-  <%= @product.image_url %>
-</p>
+    <tr>
+      <td class="field">
+        <h3> Precio de lista: <small><%= number_to_currency(@product.list_price) %></small></h3>        
+      </td>
+      <td>
+        <h3> Precio de venta: <small><%= number_to_currency(@product.sell_price) %></small></h3>        
+      </td>
+    </tr>
+    <tr>
+      <td class="field">
+        <h3> Stock: <small><%= @product.stock %></small></h3>        
+      </td>
+      <td class="field">
+        <h3> Imagen: <small><%= @product.image_url %></small></h3>
+      </td>
+    </tr>
 
-<p>
-  <b>Precio de lista:</b>
-  <%= number_to_currency(@product.list_price) %>
-</p>
-
-<p>
-  <b>Precio de venta:</b>
-  <%= number_to_currency(@product.sell_price) %>
-</p>
-
-<p>
-  <b>Stock:</b>
-  <%= @product.stock %>
-</p>
-
-<p>
-  <b>Proveedor:</b>
-    
-    <%= Provider.find(@product.provider_id).name unless @product.provider_id == nil %>
-</p>
-
+    <tr>
+      <td class="field" colspan="2">
+        <h3> Descripcion: <small><%= @product.description %></small></h3>        
+      </td>
+    </tr>
+  </table>
 
 <%= link_to 'Editar', edit_product_path(@product), {:class=>"btn btn-info"} %> |
 <%= link_to 'Ver Todos', products_path, {:class=>"btn btn-primary"} %>  |
 <%= link_to 'Agregar Otro', new_product_path, {:class=>"btn btn-success"} %> |
 <%= link_to 'Eliminar', @product, method: :delete, class: "btn btn-danger", data: { confirm: 'Estas seguro?'} %>
+<% end %>
