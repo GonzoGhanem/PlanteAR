@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130617205945) do
+ActiveRecord::Schema.define(:version => 20130618202026) do
 
   create_table "line_items", :force => true do |t|
     t.integer  "line_itemable_id"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(:version => 20130617205945) do
     t.string   "payment_type_id"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.decimal  "discount"
   end
 
 end

@@ -29,10 +29,14 @@
     </thead>
     <tfoot>
     <tr>
-      <td>
-        <h3 colspan="2">Total</h3>
+      <td colspan="3">
+        <h2 class="pull-right">Total $</h2>
       </td>
-      <td colspan="4">
+      <td colspan="1" class="input-prepend">
+      <span class="add-on">%</span>
+      <%= f.text_field :discount, :placeholder=>"Descuento", :id=>"total_discount", :class=>"prependedInput input-mini" %>
+      </td>
+      <td colspan="1">
       <%= f.text_field :amount, :placeholder=>"Total", :id=>"total_amount", :class=>"input-mini pull-right" %>
       </td>
     </tr>

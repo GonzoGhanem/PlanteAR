@@ -1,5 +1,5 @@
 class Sell < ActiveRecord::Base
-  attr_accessible :amount, :date, :payment_type_id
+  attr_accessible :amount, :date, :payment_type_id, :discount
   attr_accessible :line_items_attributes
   attr_accessible :payment_type_attributes
   attr_accessible :products_attributes
