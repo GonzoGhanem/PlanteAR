@@ -35,7 +35,10 @@ private
   def fetch_sells
     sells = Sell.order("#{sort_column} #{sort_direction}")
     @total_amount = 0
-    if params[:sSearch].present?
+    if params[:month].present?
+      puts "holis"
+      sells = sells.where("created_at like :search", search: "%#{params[:month]}%#{params[:year]}%")  
+    elsif params[:sSearch].present?
       sells = sells.where("amount like :search or created_at like :search", search: "%#{params[:sSearch]}%")
     end
     sells.each do |sell|

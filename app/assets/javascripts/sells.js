@@ -31,15 +31,23 @@ $(document).ready(function() {
     $('h3 small').text("Solo ayer - " +  day+'/'+month+'/'+year);
   };
 
-  var onlymonth = function(){
-    var currentTime = new Date();
-    var month = currentTime.getMonth() + 1;
+  var custom_filter = function(){
+    var month = $('#date_month').val();
     if (month < 10)
-      month = '0' + month;
-    var year = currentTime.getFullYear();
-    var filter = year+'-'+month+'-';
+          month = '0' + month;
+    var year = $('#date_year').val();
+    var day = "";
+    if ($.isNumeric($('#date_day').val())){
+          day = $('#date_day').val();
+          if (day < 10)
+                day = '0' + day;
+    };
+    var filter = year + '-' + month + '-' + day;
+    if (day == "")
+      day = "Todos";
+
     doFilter(filter);
-    $('h3 small').text("Solo " + getMonthName(month));
+    $('h3 small').text("Mostrando Dia/Mes/Año: " + day + '/' + getMonthName(month) + '/' + year);
   };
 
   var removefilter = function(){
@@ -49,9 +57,9 @@ $(document).ready(function() {
   };
 
   var doFilter = function(filter_value){
-    $('input').val(filter_value);
-    $('input').keyup(); // Hack to filter after changing value from js. Datatable uses keyup event instead of onchange.
-    $('input').val("");
+    $('#sells_filter input[type=text]').val(filter_value);
+    $('#sells_filter input[type=text]').keyup(); // Hack to filter after changing value from js. Datatable uses keyup event instead of onchange.
+    $('#sells_filter input[type=text]').val("");
   };
 
   var showprice = function(){
@@ -114,7 +122,7 @@ $(document).ready(function() {
     $('#sells-today').click(onlytoday);
     $('#sells-yesterday').click(onlyyesterday);    
     $('#sells-remove').click(removefilter);
-    $('#sells-month').click(onlymonth);
+    $('#custom-filter').click(custom_filter);
     ///////////////////////////////////
     $('.input-mini').tooltip();
     ///////////////////////////////////

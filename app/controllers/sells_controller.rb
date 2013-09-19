@@ -4,7 +4,9 @@ class SellsController < ApplicationController
   def index
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: SellsDatatable.new(view_context)}
+      format.json do 
+        render json: SellsDatatable.new(view_context)
+      end
     end
   end
 
