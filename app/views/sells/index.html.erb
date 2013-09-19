@@ -1,6 +1,17 @@
 <h1>Ventas</h1>
 <h3>Mostrando: <small>Todas</small></h3> 
-<a id="sells-today">Solo hoy</a> || <a id="sells-yesterday">Solo ayer</a> || <a id="sells-month">Todo el mes</a> || <a id="sells-remove"> Remover filtros</a> 
+<div class='form-inline'>
+<a id="sells-today">Solo hoy</a> || 
+<a id="sells-yesterday">Solo ayer</a> || 
+	<%= label :day, "Dia" %>
+	<%= text_field :day, {}, {:id => "date_day", :placeholder => "Dia",:class => 'input-mini'} %>
+	<%= label :month, "Mes" %>
+	<%= select_month(Date.today,{},:class => 'input-medium') %>
+	<%= label :year, "Año" %>
+	<%= select_year(Date.today,{},:class => 'input-mini') %>
+	<a id="custom-filter" class="btn btn-success">Filtrar</a> ||
+<a id="sells-remove"> Remover filtros</a> 
+</div>
 <br></br>
 <table id="sells"class="table table-striped table-bordered" data-source="<%= sells_url(format: "json") %>">
  <thead>
