@@ -1,3 +1,7 @@
 #sells tr:last-child {
 	font-weight: bold;
 }
+
+.new_product_field {
+	display: none;
+}

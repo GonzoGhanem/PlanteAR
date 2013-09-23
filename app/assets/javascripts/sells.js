@@ -62,6 +62,18 @@ $(document).ready(function() {
     $('#sells_filter input[type=text]').val("");
   };
 
+  var enable_new_product = function(){
+    if ($(this).is(":checked")){
+      $(this).parent().prev().show();
+      $(this).parent().prev().prev().hide();
+    }
+    else{
+      $(this).parent().prev().hide();
+      $(this).parent().prev().prev().show();
+    };
+  };
+
+
   var showprice = function(){
     var product_id = $(this).val(); 
     var amount_field =  $( '#' + $(this).attr('id').replace('product_id', 'amount'));
@@ -116,6 +128,7 @@ $(document).ready(function() {
     var months = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"]
     return months[parseInt(month[1]) - 1];
   };
+
   var attach_functions = function(){
     // Attach the filter function to the filter links
     // $("input").change(personalized);
@@ -124,6 +137,7 @@ $(document).ready(function() {
     $('#sells-remove').click(removefilter);
     $('#custom-filter').click(custom_filter);
     ///////////////////////////////////
+    $('input[type=checkbox]').click(enable_new_product);
     $('.input-mini').tooltip();
     ///////////////////////////////////
     $('select[id$="product_id"]').change(showprice);

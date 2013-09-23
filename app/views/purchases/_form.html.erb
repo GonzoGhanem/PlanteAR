@@ -18,7 +18,7 @@
         <%= f.select :provider_id, Provider.all.collect {|p| [ p.name, p.id ] }, {:prompt => 'Seleccione Proveedor'},{:class=>"input-xlarge"} %>
         </div>
       </th>
-      <th colspan="3">
+      <th colspan="4">
         <div>
         <%= f.date_select :date, {}, {:class=>"input-small pull-right"} %>
         </div>
@@ -27,7 +27,7 @@
     </thead>
     <tfoot>
     <tr>
-      <td colspan="4">
+      <td colspan="5">
         <h2 class="pull-right">Total $</h2>
       </td>
       <td colspan="1">
@@ -35,7 +35,7 @@
       </td>
     </tr>
     <tr>
-      <td colspan="5">
+      <td colspan="6">
         <%= link_to_add_fields "Agregar lineas de compra..", f, :line_items %>
         <%= f.submit "Registrar compra", :class=>"btn btn-success pull-right" %>
         <%= link_to 'Cancelar', purchases_path, {:class=>"btn btn-danger pull-right"} %>

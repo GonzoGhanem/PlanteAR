@@ -26,8 +26,10 @@ class PurchasesController < ApplicationController
   def new
     @purchase = Purchase.new
     3.times do
-      @purchase.line_items.build
-  end
+      line_item = @purchase.line_items.build
+      line_item.build_product
+    end
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @purchase }
