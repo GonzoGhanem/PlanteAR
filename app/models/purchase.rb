@@ -6,7 +6,7 @@ class Purchase < ActiveRecord::Base
   has_many :products, :through => :line_items
   
    # has_many :line_items, dependent: :destroy 
-  accepts_nested_attributes_for :line_items, :reject_if => lambda { |a| a[:product_id].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :line_items, :reject_if => lambda { |a| a[:product_id].blank? && a[:line_item_product_name].blank? }, :allow_destroy => true
 
   validates_presence_of :date, :message=>"La fecha no puede estar en blanco"
   validates_presence_of :provider_id, :message=>"Debe seleccionar un Proveedor para registrar la compra"
@@ -15,12 +15,22 @@ class Purchase < ActiveRecord::Base
   def update_products(action)
     if(action == "Insert")
         line_items.each do |line| 
-          @product = Product.find(line.product_id)
-          @product.list_price = line.unit_price
-          @product.provider_id = self.provider_id
-          # @product.sell_price = line.line_item_product_sell_price.sell_price
-          @product.stock = @product.stock.to_i + line.amount
-          @product.save
+          if (Product.exists?(line.product_id) )
+            @product = Product.find(line.product_id)
+            @product.list_price = line.unit_price
+            @product.provider_id = self.provider_id
+            @product.sell_price = line.line_item_product_sell_price
+            @product.stock = @product.stock.to_i + line.amount
+            @product.save
+          else
+            @product = Product.find_by_name(line.line_item_product_name)
+            @product.name = line.line_item_product_name
+            @product.list_price = line.unit_price
+            @product.provider_id = self.provider_id
+            @product.sell_price = line.line_item_product_sell_price
+            @product.stock = line.amount
+            @product.save
+          end
         end
     elsif (action == "Update")
         line_items.each do |line|

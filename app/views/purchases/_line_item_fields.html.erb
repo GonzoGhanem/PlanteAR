@@ -1,8 +1,23 @@
-<tr  class="line_fields">
-  <td>
+<tr class="line_fields">
+  <td class="old_product_field">
   	<%= f.select :product_id, Product.all.collect {|p| [ p.name, p.id ] }, {:prompt=>"Seleccione el nombre del producto"}, {:class=>"product-field input-xxlarge"} %>
   </td>
-    <td class="input-prepend">
+
+  <td class="new_product_field">
+        <%= f.text_field :line_item_product_name, :placeholder=>"Nombre", :class=>"input-xxlarge" %>
+  </td>
+  
+  <td>
+    Nuevo? <input type="checkbox"></input>
+  </td>
+
+<!--   <td class="new_product_field">
+    <%= f.fields_for :product do | builder | %>
+      <%= builder.text_field :name %>
+    <% end %>
+  </td>
+ -->
+  <td class="input-prepend">
     <span class="add-on">#</span>
     <%= f.number_field :amount, :placeholder=>"Cantidad", :title=>"Cantidad", :class=>"prependedInput amount-field input-mini pull-right" %>
   </td>
