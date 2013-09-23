@@ -10,7 +10,7 @@ class Sell < ActiveRecord::Base
   
   has_one :payment_type
 
-  accepts_nested_attributes_for :line_items, :reject_if => lambda { |a| a[:product_id].blank? }, :allow_destroy => true
+  accepts_nested_attributes_for :line_items, :reject_if => lambda { |a| a[:product_id].blank? && a[:line_item_product_name].blank? }, :allow_destroy => true
   accepts_nested_attributes_for :payment_type
 
   validates_presence_of :date, :message=>"La fecha no puede estar en blanco"
@@ -21,16 +21,24 @@ class Sell < ActiveRecord::Base
   def update_products(action)
     if(action == "Insert")
         line_items.each do |line| 
-          @product = Product.find(line.product_id)
-          @product.sell_price = line.unit_price
-          @product.stock = @product.stock.to_i - line.amount
-          @product.save
+          if (Product.exists?(line.product_id) )
+            @product = Product.find(line.product_id)
+            @product.list_price = line.unit_price
+            @product.sell_price = line.line_item_product_sell_price
+            @product.stock = @product.stock.to_i - line.amount unless @product.stock.to_i == 0
+            @product.save
+          else
+            @product = Product.find_by_name(line.line_item_product_name)
+            @product.name = line.line_item_product_name
+            @product.list_price = line.unit_price
+            @product.sell_price = line.line_item_product_sell_price
+            @product.stock = 0
+            @product.save
+          end
         end
     elsif (action == "Update")
         line_items.each do |line|
-          #line_changes = line.previous_changes
           if (line.previous_changes[:product_id].nil?)
-          #if (line_changes[:product_id].nil?)
               @product = Product.find(line.product_id)
               @product.sell_price = line.previous_changes[:unit_price][1] unless line.previous_changes[:unit_price].nil?
               @product.stock = @product.stock.to_i + line.previous_changes[:amount][0] - line.previous_changes[:amount][1] unless (line.previous_changes[:amount].nil?) 

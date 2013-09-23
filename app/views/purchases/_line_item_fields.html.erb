@@ -11,12 +11,6 @@
     Nuevo? <input type="checkbox"></input>
   </td>
 
-<!--   <td class="new_product_field">
-    <%= f.fields_for :product do | builder | %>
-      <%= builder.text_field :name %>
-    <% end %>
-  </td>
- -->
   <td class="input-prepend">
     <span class="add-on">#</span>
     <%= f.number_field :amount, :placeholder=>"Cantidad", :title=>"Cantidad", :class=>"prependedInput amount-field input-mini pull-right" %>

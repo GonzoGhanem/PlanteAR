@@ -45,7 +45,6 @@ class SellsController < ApplicationController
   # POST /sells.json
   def create
     @sell = Sell.new(params[:sell])
-
     respond_to do |format|
       if @sell.save
         @sell.update_products("Insert")
