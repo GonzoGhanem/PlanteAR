@@ -1,0 +1,42 @@
+<% if !notice.nil? %>
+  <div class="alert alert-success"><%= notice %></div>
+<% end%>
+<table class="table">
+    <tr>
+      <td colspan="2">
+        <h1> <%= @client.name %> </h1>
+      </td>
+      <td>
+        <h3> Email: <small><%= @client.email %></small></h3>
+      </td>
+      <td>
+        <h3> Telefono: <small><%= @client.phone %></small></h3>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="field">
+        <h3>Direccion: <small><%= @client.address %></small></h3>        
+      </td>
+      <td>
+        <h3> Ciudad: <small><%= @client.city %></small></h3>        
+      </td>      
+      <td>
+        <h3> Provincia: <small><%= @client.state %></small></h3>        
+      </td>
+      <td>
+        <h3> C.P.: <small><%= @client.zip_code %></small></h3>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="4"class="field">
+        <h3> Comentarios: <small><%= @client.comment %></small></h3>        
+      </td>
+    </tr>
+  </table>
+
+<%= link_to 'Editar', edit_client_path(@client), {:class=>"btn btn-info"} %> |
+<%= link_to 'Ver Todos', clients_path, {:class=>"btn btn-primary"} %>  |
+<%= link_to 'Agregar Otro', new_client_path, {:class=>"btn btn-success"} %> |
+<%= link_to 'Eliminar', @client, method: :delete, class: "btn btn-danger", data: { confirm: 'Estas seguro?'} %>
+
