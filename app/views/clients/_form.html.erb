@@ -1,0 +1,57 @@
+<%= form_for(@client) do |f| %>
+  <% if @client.errors.any? %>
+    <div class="alert alert-error">
+      <h2><%= pluralize(@client.errors.count, "fucking error") %></h2>
+      <ul>
+      <% @client.errors.values.each do |msg| %>
+        <li><%= msg[0] %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table class="table create">
+    <tr>
+      <td class="field" colspan="2">
+        <%= f.label :name, "Cliente" %>
+        <%= f.text_field :name, :class=>"input-xlarge" %>
+      </td>
+      <td class="field">
+        <%= f.label :phone, "Telefono" %>
+        <%= f.text_field :phone, :class=>"input-medium" %>
+      </td>
+      <td class="field">
+        <%= f.label :email, "Email" %>
+        <%= f.text_field :email, :class=>"input-large" %>
+      </td>
+    </tr>
+    <tr>
+      <td class="field">
+        <%= f.label :address, "Direccion" %>
+        <%= f.text_field :address, :class=>"input-xlarge" %>
+      </td>
+      <td  class="field">
+        <%= f.label :city, "Ciudad" %>
+        <%= f.text_field :city, :class=>"input-medium" %>
+      </td>
+      <td class="field">
+        <%= f.label :state, "Provincia" %>
+        <%= f.text_field :state, :class =>"input-medium" %>
+      </td>
+      <td class="field">
+        <%= f.label :zip_code, "C.P." %>
+        <%= f.text_field :zip_code, :class =>"input-mini" %>
+      </td>
+    </tr>
+    <tr>
+      <td class="field" colspan="4">
+        <%= f.label :comment, "Notas:" %>
+        <%= f.text_area :comment, :rows=>"10", :class=>"input-xxlarge" %>
+      </td>
+    </tr>
+  </table>
+  <div class="actions">
+    <%= f.submit "Guardar", :class=>"btn btn-success" %>
+    <%= link_to "Volver", clients_path, {:class=>"btn btn-danger"} %>
+  </div>
+<% end %>

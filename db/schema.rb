@@ -11,7 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130618202026) do
+ActiveRecord::Schema.define(:version => 20130924143846) do
+
+  create_table "clients", :force => true do |t|
+    t.string   "name"
+    t.string   "phone"
+    t.string   "address"
+    t.string   "zip_code"
+    t.string   "city"
+    t.string   "state"
+    t.string   "comment"
+    t.string   "email"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "line_items", :force => true do |t|
     t.integer  "line_itemable_id"
