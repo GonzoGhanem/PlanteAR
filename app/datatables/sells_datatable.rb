@@ -21,8 +21,7 @@ private
       [
       	PaymentType.find(sell.payment_type_id).name,
       	sell.amount,
-      	sell.created_at.strftime("%d/%m/%Y - %H:%M"),
-        # sell.date.strftime("%d/%m/%Y"),
+        "#{sell.date.strftime("%d/%m/%Y")} #{sell.created_at.strftime("%H:%M")}",
       	link_to('Ver', sell)
       ]
     end
@@ -37,9 +36,9 @@ private
     @total_amount = 0
     if params[:month].present?
       puts "holis"
-      sells = sells.where("created_at like :search", search: "%#{params[:month]}%#{params[:year]}%")  
+      sells = sells.where("date like :search", search: "%#{params[:month]}%#{params[:year]}%")  
     elsif params[:sSearch].present?
-      sells = sells.where("amount like :search or created_at like :search", search: "%#{params[:sSearch]}%")
+      sells = sells.where("amount like :search or date like :search", search: "%#{params[:sSearch]}%")
     end
     sells.each do |sell|
       @total_amount = @total_amount + sell.amount 

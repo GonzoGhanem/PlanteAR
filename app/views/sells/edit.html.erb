@@ -20,16 +20,16 @@
             <%= f.select :payment_type_id, PaymentType.all.collect {|p| [ p.name, p.id ] }, {:prompt => 'Seleccione Metodo de pago'},{:class=>"input-large"} %>
           </div>
       </th>
-      <th colspan="2">
+      <th colspan="3">
         <div>
-        <%= f.date_select :date, {}, {:class=>"input-small pull-right"} %>
+        <%= f.date_select :date, {:use_month_names => month_names}, {:class=>"input-small pull-right"} %>
         </div>
       </th>
     </tr>
     </thead>
     <tfoot>
     <tr>
-      <td colspan="3">
+      <td colspan="4">
         <h2 class="pull-right">Total $</h2>
       </td>
       <td colspan="1" class="input-prepend">
@@ -41,7 +41,7 @@
       </td>
     </tr>
     <tr>
-      <td colspan="5">
+      <td colspan="6">
         <%= link_to_add_fields "Agregar lineas de venta..", f, :line_items %>
         <%= f.submit "Actualizar venta", :class=>"btn btn-success pull-right" %>
         <%= link_to 'Cancelar', sells_path, {:class=>"btn btn-danger pull-right"} %>
