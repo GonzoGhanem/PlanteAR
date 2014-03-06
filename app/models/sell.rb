@@ -21,20 +21,10 @@ class Sell < ActiveRecord::Base
   def update_products(action)
     if(action == "Insert")
         line_items.each do |line| 
-          if (Product.exists?(line.product_id) )
-            @product = Product.find(line.product_id)
-            @product.list_price = line.unit_price
-            @product.sell_price = line.line_item_product_sell_price
-            @product.stock = @product.stock.to_i - line.amount unless @product.stock.to_i == 0
-            @product.save
-          else
-            @product = Product.find_by_name(line.line_item_product_name)
-            @product.name = line.line_item_product_name
-            @product.list_price = line.unit_price
-            @product.sell_price = line.line_item_product_sell_price
-            @product.stock = 0
-            @product.save
-          end
+          @product = Product.find(line.product_id)
+          @product.sell_price = line.unit_price
+          @product.stock = @product.stock.to_i - line.amount unless @product.stock.to_i == 0
+          @product.save
         end
     elsif (action == "Update")
         line_items.each do |line|
