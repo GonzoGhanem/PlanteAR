@@ -6,7 +6,7 @@
 	<%= label :day, "Dia" %>
 	<%= text_field :day, {}, {:id => "date_day", :placeholder => "Dia",:class => 'input-mini'} %>
 	<%= label :month, "Mes" %>
-	<%= select_month(Date.today,{},:class => 'input-medium') %>
+	<%= select_month(Date.today,{:use_month_names => month_names},:class => 'input-medium') %>
 	<%= label :year, "Año" %>
 	<%= select_year(Date.today,{},:class => 'input-mini') %>
 	<a id="custom-filter" class="btn btn-success">Filtrar</a> ||
